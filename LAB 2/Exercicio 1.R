@@ -26,7 +26,7 @@ maximo <- max(notas)
 print(paste("Máximo:", maximo))
 
 # Amplitude total
-amplitude_total <- maximo - minimo
+amplitude_total <- diff(range(notas))
 print(paste("Amplitude Total:", amplitude_total))
 
 # Quartis
