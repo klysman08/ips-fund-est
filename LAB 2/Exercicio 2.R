@@ -15,9 +15,9 @@ cat("   Temperatura mínima registrada:", temp_minima, "\n")
 temp_media <- mean(temperaturas)
 cat("c) Temperatura média:", temp_media, "\n")
 
-# d) A dispersão das temperaturas relativamente à temperatura média é medida pelo desvio padrão.
+# d) A dispersão das temperaturas relativamente à temperatura média é medida pelo desvio padrão. # nolint: line_length_linter.
 dispersao <- sd(temperaturas)
-cat("d) A dispersão das temperaturas relativamente à temperatura média é", dispersao, "\n")
+cat("d) A dispersão das temperaturas relativamente à temperatura média é", dispersao, "\n") # nolint
 
 # e) Ordene a amostra
 temperaturas_ordenadas <- sort(temperaturas)

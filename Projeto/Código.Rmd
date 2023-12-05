@@ -1,0 +1,81 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+
+```{r}
+#Carregando dados
+df <- read.csv("dados.csv")
+df <- subset(df, select = -c(Carimbo.de.data.hora, Pontuação))
+
+summary(df)
+
+```
+
+```{r}
+# Converta a coluna "Qual a sua idade" para numérica
+df$Qual.a.sua.idade. <- as.numeric(df$Qual.a.sua.idade.)
+
+# Crie o gráfico de barras
+barplot(table(df$Qual.a.sua.idade.), main = "Distribuição de Idades", xlab = "Idade", ylab = "Frequência")
+```
+
+```{r}
+# Crie o gráfico boxplot
+boxplot(df$Qual.a.sua.idade., main = "Boxplot da Idade", ylab = "Idade")
+```
+
+```{r}
+#gráfico de barras
+barplot(table(df$Quais.são.os.principais.obstáculos.que.o.impedem.de.adotar.fontes.de.energia.renovável.), 
+        main = "Principais Obstáculos para Adoção de Energias Renováveis",
+        xlab = "Obstáculos",
+        ylab = "Frequência")
+```
+
+```{r}
+# Identificar tipos de variáveis
+tipos_de_variaveis <- sapply(df, class)
+
+# Mostrar a classificação
+print(tipos_de_variaveis)
+```
+
+
+
+```{r}
+# Inicializar uma lista para armazenar as tabelas
+tabelas_por_coluna <- list()
+
+# Iterar sobre todas as colunas
+for (nome_coluna in names(df)) {
+  tabela_coluna <- table(df[[nome_coluna]])
+  tabelas_por_coluna[[nome_coluna]] <- tabela_coluna
+}
+
+
+```
+
+
+```{r}
+# Criar gráficos de barras para todas as tabelas
+par(mfrow = c(1, 1))  # Define um layout de gráficos em 2 linhas e 2 colunas
+
+for (nome_coluna in names(tabelas_por_coluna)) {
+  barplot(tabelas_por_coluna[[nome_coluna]],
+          main = paste("Gráfico de Barras de", nome_coluna),
+          ylab = "Frequência",
+          col = "lightblue",
+          border = "black",
+          cex.main = 0.5
+  )
+}
+```
+
+
+
+
