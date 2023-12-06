@@ -15,6 +15,12 @@ df <- subset(df, select = -c(Carimbo.de.data.hora, Pontuação))
 summary(df)
 
 ```
+```{r}
+df$Considera.que.os.veículos.elétricos.superem.os.veículos.movidos.a.combustíveis.fósseis.em.popularidade.nas.próximas.décadas.
+df
+
+
+```
 
 ```{r}
 # Converta a coluna "Qual a sua idade" para numérica
@@ -74,6 +80,69 @@ for (nome_coluna in names(tabelas_por_coluna)) {
           cex.main = 0.5
   )
 }
+```
+
+```{r}
+df$Considera.que.os.veículos.elétricos.superem.os.veículos.movidos.a.combustíveis.fósseis.em.popularidade.nas.próximas.décadas.
+df$NumericColumn <- as.numeric(df$Considera.que.os.veículos.elétricos.superem.os.veículos.movidos.a.combustíveis.fósseis.em.popularidade.nas.próximas.décadas.)
+
+df$NumericColumn
+
+```
+```{r}
+# Contar as ocorrências
+ocorrencias <- table(df$Considera.que.os.veículos.elétricos.superem.os.veículos.movidos.a.combustíveis.fósseis.em.popularidade.nas.próximas.décadas.)
+
+# Criar um novo dataframe
+df_ocorrencias <- data.frame(Valor = names(ocorrencias), Ocorrencias = as.numeric(ocorrencias))
+
+# Mostrar o novo dataframe
+print(df_ocorrencias)
+```
+```{r}
+library(ggplot2)
+
+ggplot(df_ocorrencias, aes(x = Valor, y = Ocorrencias)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Distribuição de Ocorrências", x = "Valor", y = "Ocorrencias")
+
+```
+```{r}
+# Exemplo de dados
+df_ocorrencias <- data.frame(
+  Valor = c("Extremamente Improvável", "Extremamente Provável", "Muito Provável", "Pouco Provável", "Provável"),
+  Ocorrencias = c(3, 15, 22, 14, 27)
+)
+
+# Convertendo a coluna 'Valor' para fator e atribuindo valores numéricos
+df_ocorrencias$Valor <- as.factor(df_ocorrencias$Valor)
+df_ocorrencias$ValorNumeric <- as.numeric(df_ocorrencias$Valor)
+
+# 1. Frequência (Contagem)
+total_observacoes <- sum(df_ocorrencias$Ocorrencias)
+
+# 2. Moda
+moda <- df_ocorrencias$Valor[df_ocorrencias$Ocorrencias == max(df_ocorrencias$Ocorrencias)]
+
+# 3. Mediana
+mediana <- median(rep(df_ocorrencias$ValorNumeric, df_ocorrencias$Ocorrencias))
+
+# 4. Média Ponderada
+media_ponderada <- sum(df_ocorrencias$ValorNumeric * df_ocorrencias$Ocorrencias) / sum(df_ocorrencias$Ocorrencias)
+
+# 5. Desvio Padrão e Variância
+desvio_padrao <- sd(rep(df_ocorrencias$ValorNumeric, df_ocorrencias$Ocorrencias))
+variancia <- var(rep(df_ocorrencias$ValorNumeric, df_ocorrencias$Ocorrencias))
+
+# Exibir os resultados
+cat("1. Frequência (Contagem):", total_observacoes, "\n")
+cat("2. Moda:", moda, "\n")
+cat("3. Mediana:", mediana, "\n")
+cat("4. Média Ponderada:", media_ponderada, "\n")
+cat("5. Desvio Padrão:", desvio_padrao, "\n")
+cat("   Variância:", variancia, "\n")
+
+
 ```
 
 
